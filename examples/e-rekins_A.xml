@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Invoice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2">
+	<cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0</cbc:CustomizationID>
+	<cbc:ProfileID>urn:fdc:peppol.eu:2017:poacc:billing:01:1.0</cbc:ProfileID>
+	<cbc:ID>LRC171-25</cbc:ID>
+	<cbc:IssueDate>2025-09-30</cbc:IssueDate>
+	<cbc:DueDate>2025-09-30</cbc:DueDate>
+	<cbc:InvoiceTypeCode>80</cbc:InvoiceTypeCode>
+	<cbc:Note>Rēķins sagatavots elektroniski un ir derīgs bez paraksta.</cbc:Note>
+	<cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+	<cbc:BuyerReference>Robotiem</cbc:BuyerReference>
+	<cac:ContractDocumentReference>
+		<cbc:ID>LĪGUMS Nr. 6-9-15.09.2025.-1</cbc:ID>
+	</cac:ContractDocumentReference>
+	<cac:AccountingSupplierParty>
+		<cac:Party>
+			<cbc:EndpointID schemeID="0218">40103512178</cbc:EndpointID>
+			<cac:PartyIdentification>
+				<cbc:ID schemeID="0218">40103512178</cbc:ID>
+			</cac:PartyIdentification>
+			<cac:PartyName>
+				<cbc:Name>Sabiedrība ar ierobežotu atbildību "Logics Research Centre"</cbc:Name>
+			</cac:PartyName>
+			<cac:PostalAddress>
+				<cac:AddressLine>
+					<cbc:Line>Stērstu iela 7 - 6, Rīga, LV-1004</cbc:Line>
+				</cac:AddressLine>
+				<cac:Country>
+					<cbc:IdentificationCode>LV</cbc:IdentificationCode>
+				</cac:Country>
+			</cac:PostalAddress>
+			<cac:PartyTaxScheme>
+				<cbc:CompanyID>40103512178</cbc:CompanyID>
+				<cac:TaxScheme>
+					<cbc:ID>!=VAT</cbc:ID>
+				</cac:TaxScheme>
+			</cac:PartyTaxScheme>
+			<cac:PartyLegalEntity>
+				<cbc:RegistrationName>Sabiedrība ar ierobežotu atbildību "Logics Research Centre"</cbc:RegistrationName>
+				<cbc:CompanyID schemeID="0218">40103512178</cbc:CompanyID>
+			</cac:PartyLegalEntity>
+		</cac:Party>
+	</cac:AccountingSupplierParty>
+	<cac:AccountingCustomerParty>
+		<cac:Party>
+			<cbc:EndpointID schemeID="0218">40103632832</cbc:EndpointID>
+			<cac:PartyIdentification>
+				<cbc:ID schemeID="0218">40103632832</cbc:ID>
+			</cac:PartyIdentification>
+			<cac:PartyName>
+				<cbc:Name>SIA "Robotiem"</cbc:Name>
+			</cac:PartyName>
+			<cac:PostalAddress>
+				<cac:AddressLine>
+					<cbc:Line>Valkas nov., Valka, Kārļa Skalbes iela 8 - 1, LV-4701</cbc:Line>
+				</cac:AddressLine>
+				<cac:Country>
+					<cbc:IdentificationCode>LV</cbc:IdentificationCode>
+				</cac:Country>
+			</cac:PostalAddress>
+			<cac:PartyTaxScheme>
+				<cbc:CompanyID>LV40103632832</cbc:CompanyID>
+				<cac:TaxScheme>
+					<cbc:ID>VAT</cbc:ID>
+				</cac:TaxScheme>
+			</cac:PartyTaxScheme>
+			<cac:PartyLegalEntity>
+				<cbc:RegistrationName>SIA "Robotiem"</cbc:RegistrationName>
+				<cbc:CompanyID schemeID="0218">40103632832</cbc:CompanyID>
+			</cac:PartyLegalEntity>
+		</cac:Party>
+	</cac:AccountingCustomerParty>
+	<cac:PaymentMeans>
+		<cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+		<cac:PayeeFinancialAccount>
+			<cbc:ID>LV64UNLA0050018532131</cbc:ID>
+			<cac:FinancialInstitutionBranch>
+				<cbc:ID>UNLALV2X</cbc:ID>
+			</cac:FinancialInstitutionBranch>
+		</cac:PayeeFinancialAccount>
+	</cac:PaymentMeans>
+	<cac:TaxTotal>
+		<cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+		<cac:TaxSubtotal>
+			<cbc:TaxableAmount currencyID="EUR">600.00</cbc:TaxableAmount>
+			<cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+			<cac:TaxCategory>
+				<cbc:ID>E</cbc:ID>
+				<cbc:Percent>0</cbc:Percent>
+				<cbc:TaxExemptionReason>Saskaņā ar PVN likumu uzņēmums nav PVN maksātājs    </cbc:TaxExemptionReason>
+				<cac:TaxScheme>
+					<cbc:ID>VAT</cbc:ID>
+				</cac:TaxScheme>
+			</cac:TaxCategory>
+		</cac:TaxSubtotal>
+	</cac:TaxTotal>
+	<cac:LegalMonetaryTotal>
+		<cbc:LineExtensionAmount currencyID="EUR">600.00</cbc:LineExtensionAmount>
+		<cbc:TaxExclusiveAmount currencyID="EUR">600.00</cbc:TaxExclusiveAmount>
+		<cbc:TaxInclusiveAmount currencyID="EUR">600.00</cbc:TaxInclusiveAmount>
+		<cbc:PrepaidAmount currencyID="EUR">0.00</cbc:PrepaidAmount>
+		<cbc:PayableAmount currencyID="EUR">600.00</cbc:PayableAmount>
+	</cac:LegalMonetaryTotal>
+	<cac:InvoiceLine>
+		<cbc:ID>1</cbc:ID>
+		<cbc:InvoicedQuantity unitCode="H87">1.00</cbc:InvoicedQuantity>
+		<cbc:LineExtensionAmount currencyID="EUR">600.00</cbc:LineExtensionAmount>
+		<cac:Item>
+			<cbc:Name>Programmēšanas pakalpojumi</cbc:Name>
+			<cac:ClassifiedTaxCategory>
+				<cbc:ID>E</cbc:ID>
+				<cbc:Percent>0</cbc:Percent>
+				<cac:TaxScheme>
+					<cbc:ID>VAT</cbc:ID>
+				</cac:TaxScheme>
+			</cac:ClassifiedTaxCategory>
+		</cac:Item>
+		<cac:Price>
+			<cbc:PriceAmount currencyID="EUR">600.00</cbc:PriceAmount>
+			<cbc:BaseQuantity>1.00</cbc:BaseQuantity>
+		</cac:Price>
+	</cac:InvoiceLine>
+</Invoice>

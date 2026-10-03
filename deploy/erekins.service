@@ -1,0 +1,22 @@
+[Unit]
+Description=E-rekins local OCR service
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/kursants/workspace/erekins
+ExecStart=/home/kursants/.nvm/versions/node/v24.21.0/bin/node server/server.mjs
+Environment=HOST=127.0.0.1
+Environment=PORT=3107
+EnvironmentFile=-/home/kursants/workspace/erekins/.env
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+MemoryMax=768M
+TasksMax=64
+
+[Install]
+WantedBy=default.target

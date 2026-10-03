@@ -1,0 +1,216 @@
+<!--  Turpmākā informācija par lauku garuma ierobežojumiem attiecas uz portālā Latvija.gov.lv pieejamo e-rēķina izveides formu!
+Pārsniedzot norādītos limitus, automātiski ģenerētais Latvija.gov.lv PDF rēķins var saturēt nepilnīgu informāciju, kā arī
+e-rēķina formā to nebūs iespējams pilnvērtīgi attēlot.  -->
+<Invoice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2">
+<cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0</cbc:CustomizationID>
+<cbc:ProfileID>urn:fdc:peppol.eu:2017:poacc:billing:01:1.0</cbc:ProfileID>
+<cbc:ID>1</cbc:ID>
+<!--  lauka garuma ierobežojums: 35 rakstzīmes  -->
+<cbc:IssueDate>2025-04-02</cbc:IssueDate>
+<cbc:DueDate>2025-04-16</cbc:DueDate>
+<cbc:InvoiceTypeCode>386</cbc:InvoiceTypeCode>
+<cbc:Note>Papildus informācija priekš rēķina saņēmēja</cbc:Note>
+<!--  lauka garuma ierobežojums: 2000 rakstzīmes  -->
+<cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+<cbc:BuyerReference>Atsauce, ko norāda rēķina izsniedzējs</cbc:BuyerReference>
+<!--  lauka garuma ierobežojums: 200 rakstzīmes  -->
+<cac:BillingReference>
+<cac:InvoiceDocumentReference>
+<cbc:ID>89/12/2024</cbc:ID>
+<!--  lauka garuma ierobežojums: 35 rakstzīmes  -->
+<cbc:IssueDate>2024-12-18</cbc:IssueDate>
+</cac:InvoiceDocumentReference>
+</cac:BillingReference>
+<cac:ContractDocumentReference>
+<cbc:ID>1-258/2025</cbc:ID>
+<!--  lauka garuma ierobežojums: 100 rakstzīmes  -->
+</cac:ContractDocumentReference>
+<cac:AccountingSupplierParty>
+<cac:Party>
+<cbc:EndpointID schemeID="0218">12345678910</cbc:EndpointID>
+<cac:PartyIdentification>
+<cbc:ID schemeID="0218">12345678910</cbc:ID>
+<!--  lauka garuma ierobežojums: 11 rakstzīmes  -->
+</cac:PartyIdentification>
+<cac:PartyName>
+<cbc:Name> SIA "Uzņēmums"</cbc:Name>
+<!--  lauka garuma ierobežojums: 200 rakstzīmes  -->
+</cac:PartyName>
+<cac:PostalAddress>
+<cac:AddressLine>
+<cbc:Line>Rīgas iela 1, Rīga, LV-0000</cbc:Line>
+<!--  lauka garuma ierobežojums: 500 rakstzīmes  -->
+</cac:AddressLine>
+<cac:Country>
+<cbc:IdentificationCode>LV</cbc:IdentificationCode>
+</cac:Country>
+</cac:PostalAddress>
+<cac:PartyTaxScheme>
+<cbc:CompanyID>12345678910</cbc:CompanyID>
+<!--  lauka garuma ierobežojums: 11 rakstzīmes, ja schemeID=0218; LV + 11 rakstzīmes, ja 9939  -->
+<cac:TaxScheme>
+<cbc:ID>!=VAT</cbc:ID>
+<!--  Ja schemeID=0218, tad vērtība !=VAT  -->
+</cac:TaxScheme>
+</cac:PartyTaxScheme>
+<cac:PartyLegalEntity>
+<cbc:RegistrationName> SIA "Uzņēmums"</cbc:RegistrationName>
+<cbc:CompanyID schemeID="0218">12345678910</cbc:CompanyID>
+</cac:PartyLegalEntity>
+</cac:Party>
+</cac:AccountingSupplierParty>
+<cac:AccountingCustomerParty>
+<cac:Party>
+<cbc:EndpointID schemeID="0218">09080706050</cbc:EndpointID>
+<cac:PartyIdentification>
+<cbc:ID schemeID="0218">09080706050</cbc:ID>
+<!--  lauka garuma ierobežojums: 11 rakstzīmes  -->
+</cac:PartyIdentification>
+<cac:PartyName>
+<cbc:Name>SIA "Pasūtītājs"</cbc:Name>
+<!--  lauka garuma ierobežojums: 200 rakstzīmes  -->
+</cac:PartyName>
+<cac:PostalAddress>
+<cac:AddressLine>
+<cbc:Line>Gulbenes iela 152, Sigulda, LV-0101</cbc:Line>
+<!--  lauka garuma ierobežojums: 500 rakstzīmes  -->
+</cac:AddressLine>
+<cac:Country>
+<cbc:IdentificationCode>LV</cbc:IdentificationCode>
+</cac:Country>
+</cac:PostalAddress>
+<cac:PartyTaxScheme>
+<cbc:CompanyID>09080706050</cbc:CompanyID>
+<!--  lauka garuma ierobežojums: 11 rakstzīmes, ja schemeID=0218; LV + 11 rakstzīmes, ja 9939  -->
+<cac:TaxScheme>
+<cbc:ID>!=VAT</cbc:ID>
+</cac:TaxScheme>
+</cac:PartyTaxScheme>
+<cac:PartyLegalEntity>
+<cbc:RegistrationName>SIA "Pasūtītājs"</cbc:RegistrationName>
+<cbc:CompanyID schemeID="0218">09080706050</cbc:CompanyID>
+</cac:PartyLegalEntity>
+</cac:Party>
+</cac:AccountingCustomerParty>
+<cac:PayeeParty>
+<cac:PartyName>
+<cbc:Name>SIA "Pārstāvis"</cbc:Name>
+<!--  lauka garuma ierobežojums: 200 rakstzīmes  -->
+</cac:PartyName>
+<cac:PartyLegalEntity>
+<cbc:CompanyID schemeID="0218">85274196315</cbc:CompanyID>
+<!--  lauka garuma ierobežojums: 30 rakstzīmes  -->
+</cac:PartyLegalEntity>
+</cac:PayeeParty>
+<cac:PaymentMeans>
+<cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+<!--  šobrīd noklusētā vērtība, nav pieejams saskarnē  -->
+<cac:PayeeFinancialAccount>
+<cbc:ID>LV00ABCD98765432188</cbc:ID>
+<!--  lauka garuma ierobežojums: 34 rakstzīmes, tiek pārbaudīta izteiksme ar regex ^[A-Z]{2}[0-9]{2}[A-Z0-9]{11,30}$  -->
+<cac:FinancialInstitutionBranch>
+<cbc:ID>ABCD12</cbc:ID>
+<!--  lauka garuma ierobežojums: 20 rakstzīmes  -->
+</cac:FinancialInstitutionBranch>
+</cac:PayeeFinancialAccount>
+<cac:PaymentMandate>
+<cac:PayerFinancialAccount>
+<cbc:ID>AB12BCDF01234567891021</cbc:ID>
+<!--  lauka garuma ierobežojums: 34 rakstzīmes, tiek pārbaudīta izteiksme ar regex ^[A-Z]{2}[0-9]{2}[A-Z0-9]{11,30}$  -->
+</cac:PayerFinancialAccount>
+</cac:PaymentMandate>
+</cac:PaymentMeans>
+<cac:TaxTotal>
+<cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+<cac:TaxSubtotal>
+<cbc:TaxableAmount currencyID="EUR">506.35</cbc:TaxableAmount>
+<cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+<cac:TaxCategory>
+<cbc:ID>O</cbc:ID>
+<cbc:TaxExemptionReason>Paskaidrojums, kas jāaizpilda, ja izvēlētas likmes AE, E un O, un sniedz informāciju, kādēļ nodoklis nav piemērojams</cbc:TaxExemptionReason>
+<!--  lauka garuma ierobežojums: 500 rakstzīmes  -->
+<cac:TaxScheme>
+<cbc:ID>VAT</cbc:ID>
+</cac:TaxScheme>
+</cac:TaxCategory>
+</cac:TaxSubtotal>
+</cac:TaxTotal>
+<cac:LegalMonetaryTotal>
+<cbc:LineExtensionAmount currencyID="EUR">506.35</cbc:LineExtensionAmount>
+<cbc:TaxExclusiveAmount currencyID="EUR">506.35</cbc:TaxExclusiveAmount>
+<cbc:TaxInclusiveAmount currencyID="EUR">506.35</cbc:TaxInclusiveAmount>
+<cbc:PrepaidAmount currencyID="EUR">218.32</cbc:PrepaidAmount>
+<cbc:PayableAmount currencyID="EUR">288.03</cbc:PayableAmount>
+</cac:LegalMonetaryTotal>
+<cac:InvoiceLine>
+<cbc:ID>1</cbc:ID>
+<cbc:Note>Papildus informācija, kuru rēķina izsniedzējs norādījis priekš rēķina saņēmēja</cbc:Note>
+<!--  lauka garuma ierobežojums: 2000 rakstzīmes  -->
+<cbc:InvoicedQuantity unitCode="H87">555.431</cbc:InvoicedQuantity>
+<!--  skaitlis 123456.123456789  -->
+<cbc:LineExtensionAmount currencyID="EUR">439.35</cbc:LineExtensionAmount>
+<!--  skaitlis 123456.123456789  -->
+<cac:AllowanceCharge>
+<cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+<cbc:AllowanceChargeReason>Atlaide piemērošanas pamatojums</cbc:AllowanceChargeReason>
+<!--  lauka garuma ierobežojums: 500 rakstzīmes  -->
+<cbc:Amount currencyID="EUR">5.00</cbc:Amount>
+</cac:AllowanceCharge>
+<cac:AllowanceCharge>
+<cbc:ChargeIndicator>true</cbc:ChargeIndicator>
+<cbc:AllowanceChargeReason>Piemaksas piemērošanas pamatojums</cbc:AllowanceChargeReason>
+<!--  lauka garuma ierobežojums: 500 rakstzīmes  -->
+<cbc:Amount currencyID="EUR">1.00</cbc:Amount>
+</cac:AllowanceCharge>
+<cac:Item>
+<cbc:Name>Prece 1</cbc:Name>
+<!--  lauka garuma ierobežojums: 200 rakstzīmes  -->
+<cac:ClassifiedTaxCategory>
+<cbc:ID>O</cbc:ID>
+<cac:TaxScheme>
+<cbc:ID>VAT</cbc:ID>
+</cac:TaxScheme>
+</cac:ClassifiedTaxCategory>
+</cac:Item>
+<cac:Price>
+<cbc:PriceAmount currencyID="EUR">0.7982103</cbc:PriceAmount>
+<cbc:BaseQuantity>1.00</cbc:BaseQuantity>
+</cac:Price>
+</cac:InvoiceLine>
+<cac:InvoiceLine>
+<cbc:ID>2</cbc:ID>
+<cbc:InvoicedQuantity unitCode="HUR">1.00</cbc:InvoicedQuantity>
+<cbc:LineExtensionAmount currencyID="EUR">10.00</cbc:LineExtensionAmount>
+<cac:Item>
+<cbc:Name>Pakalpojums 1</cbc:Name>
+<cac:ClassifiedTaxCategory>
+<cbc:ID>O</cbc:ID>
+<cac:TaxScheme>
+<cbc:ID>VAT</cbc:ID>
+</cac:TaxScheme>
+</cac:ClassifiedTaxCategory>
+</cac:Item>
+<cac:Price>
+<cbc:PriceAmount currencyID="EUR">10.00</cbc:PriceAmount>
+<cbc:BaseQuantity>1.00</cbc:BaseQuantity>
+</cac:Price>
+</cac:InvoiceLine>
+<cac:InvoiceLine>
+<cbc:ID>3</cbc:ID>
+<cbc:InvoicedQuantity unitCode="T3">3.00</cbc:InvoicedQuantity>
+<cbc:LineExtensionAmount currencyID="EUR">57.00</cbc:LineExtensionAmount>
+<cac:Item>
+<cbc:Name>Prece 2</cbc:Name>
+<cac:ClassifiedTaxCategory>
+<cbc:ID>O</cbc:ID>
+<cac:TaxScheme>
+<cbc:ID>VAT</cbc:ID>
+</cac:TaxScheme>
+</cac:ClassifiedTaxCategory>
+</cac:Item>
+<cac:Price>
+<cbc:PriceAmount currencyID="EUR">18.99877762</cbc:PriceAmount>
+<cbc:BaseQuantity>1.00</cbc:BaseQuantity>
+</cac:Price>
+</cac:InvoiceLine>
+</Invoice>

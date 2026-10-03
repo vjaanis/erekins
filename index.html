@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="lv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Bezmaksas rīks rēķina sagatavošanai, pārbaudei un eksportam UBL XML vai PDF formātā.">
+  <meta name="theme-color" content="#f5f7f3">
+  <title>E-rēķins — sagatavo XML un PDF</title>
+  <link rel="stylesheet" href="assets/vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/invoice-core.js" defer></script>
+  <script src="assets/js/app.js" defer></script>
+</head>
+<body>
+  <a class="visually-hidden-focusable skip-link" href="#main-content">Pāriet uz galveno saturu</a>
+
+  <header class="app-header border-bottom">
+    <div class="container-xxl d-flex flex-wrap align-items-center justify-content-between gap-3 py-3">
+      <a class="brand d-inline-flex align-items-center gap-2 text-decoration-none" href="./" aria-label="E-rēķins — sākums">
+        <span class="brand-mark" aria-hidden="true">ER</span>
+        <span><strong>E-rēķins</strong><small>UBL 2.1 darbnīca</small></span>
+      </a>
+      <div class="d-flex flex-wrap align-items-center justify-content-end gap-2">
+        <nav aria-label="Vietnes sadaļas">
+          <a class="btn btn-outline-primary btn-sm" href="/"><span aria-hidden="true">←</span> MI apmācība</a>
+        </nav>
+        <span class="privacy-note d-none d-md-inline">Rēķini netiek saglabāti</span>
+        <button class="btn btn-outline-secondary btn-sm" id="reset-button" type="button">Sākt no jauna</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="intro-section border-bottom">
+      <div class="container-xxl py-4 py-lg-5">
+        <div class="row align-items-end g-4">
+          <div class="col-lg-7">
+            <p class="eyebrow mb-2">Rēķins bez liekiem līkločiem</p>
+            <h1 class="display-5 fw-bold mb-3">Sagatavo, pārbaudi un lejupielādē</h1>
+            <p class="lead text-secondary mb-0">Aizpildi datus pats vai ielādē esošu UBL XML failu. Rīks aprēķina summas un sagatavo lejupielādējamu e-rēķinu un drukājamu PDF.</p>
+          </div>
+          <div class="col-lg-5 vstack gap-3">
+            <div class="import-card p-3 p-md-4">
+              <label class="form-label fw-semibold" for="xml-file">Turpināt ar esošu e-rēķinu</label>
+              <div class="d-flex flex-column flex-sm-row gap-2">
+                <input class="form-control" id="xml-file" type="file" accept=".xml,text/xml,application/xml" aria-describedby="xml-help">
+                <button class="btn btn-outline-primary text-nowrap" id="demo-button" type="button">Ielikt piemēru</button>
+              </div>
+              <div class="form-text" id="xml-help">Pieņem UBL 2.1 XML līdz 5 MB. Fails netiek sūtīts uz serveri.</div>
+            </div>
+            <div class="import-card ocr-card p-3 p-md-4">
+              <div class="d-flex justify-content-between align-items-start gap-3">
+                <div>
+                  <label class="form-label fw-semibold" for="ocr-file">Nolasīt rēķina PDF vai attēlu</label>
+                  <p class="small text-secondary mb-3">Izvēlies PDF, PNG, JPEG, WEBP vai GIF failu līdz 8 MB.</p>
+                </div>
+                <span class="badge rounded-pill text-bg-light border">OCR</span>
+              </div>
+              <div class="d-flex flex-column flex-sm-row gap-2">
+                <input class="form-control" id="ocr-file" type="file" accept="application/pdf,.pdf,image/png,image/jpeg,image/webp,image/gif" aria-describedby="ocr-help">
+                <button class="btn btn-primary text-nowrap" id="ocr-button" type="button">Nolasīt dokumentu</button>
+              </div>
+              <div class="form-text" id="ocr-help">PDF vai attēls tiek nosūtīts OpenAI dokumentu redzes modelim; attēliem kļūmes gadījumā darbojas arī lokālais OCR. Serverī fails netiek saglabāts. Rezultāts obligāti jāpārbauda.</div>
+              <div class="ocr-status mt-3 d-none" id="ocr-status" role="status" aria-live="polite"></div>
+              <details class="mt-3 d-none" id="ocr-result">
+                <summary>Nolasītais teksts</summary>
+                <label class="visually-hidden" for="ocr-text">OCR nolasītais teksts</label>
+                <textarea class="form-control mt-2" id="ocr-text" rows="7" readonly></textarea>
+              </details>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container-xxl py-4 py-lg-5">
+      <div class="alert alert-info d-flex gap-3 align-items-start" role="note">
+        <span class="alert-icon" aria-hidden="true">i</span>
+        <div><strong>Pirms iesniegšanas pārbaudi.</strong> Rīks veic lokālu pamatpārbaudi, bet neaizstāj pilnu PEPPOL validatoru vai grāmatveža konsultāciju. PVN likmi un atbrīvojuma pamatojumu izvēlies atbilstoši savam darījumam.</div>
+      </div>
+
+      <div class="validation-summary d-none" id="validation-summary" role="alert" aria-labelledby="validation-title" tabindex="-1">
+        <h2 class="h5" id="validation-title">Lūdzu, izlabo norādītos laukus</h2>
+        <ul class="mb-0" id="validation-list"></ul>
+      </div>
+
+      <div class="row g-4 align-items-start">
+        <div class="col-xl-7">
+          <form id="invoice-form" novalidate>
+            <section class="form-section card border-0 shadow-sm mb-4" aria-labelledby="invoice-heading">
+              <div class="card-body p-3 p-md-4">
+                <div class="section-title d-flex align-items-center gap-3 mb-4">
+                  <span>01</span><div><p class="eyebrow mb-1">Dokuments</p><h2 class="h4 mb-0" id="invoice-heading">Rēķina informācija</h2></div>
+                </div>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label" for="invoice-number">Rēķina numurs <span class="required">*</span></label>
+                    <input class="form-control" id="invoice-number" maxlength="35" required autocomplete="off">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="buyer-reference">Pircēja atsauce <span class="required">*</span></label>
+                    <input class="form-control" id="buyer-reference" maxlength="200" required aria-describedby="buyer-reference-help">
+                    <div class="form-text" id="buyer-reference-help">Līguma, pasūtījuma vai atbildīgās personas atsauce.</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="issue-date">Izrakstīšanas datums <span class="required">*</span></label>
+                    <input class="form-control" id="issue-date" type="date" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="due-date">Apmaksas termiņš <span class="required">*</span></label>
+                    <input class="form-control" id="due-date" type="date" required>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label" for="invoice-note">Piezīme</label>
+                    <textarea class="form-control" id="invoice-note" rows="2" maxlength="2000" placeholder="Piemēram, apmaksas vai piegādes informācija"></textarea>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <div class="row g-4 mb-4">
+              <div class="col-md-6">
+                <section class="form-section card border-0 shadow-sm h-100" aria-labelledby="supplier-heading">
+                  <div class="card-body p-3 p-md-4">
+                    <div class="section-title d-flex align-items-center gap-3 mb-4"><span>02</span><div><p class="eyebrow mb-1">No</p><h2 class="h4 mb-0" id="supplier-heading">Pārdevējs</h2></div></div>
+                    <div class="vstack gap-3">
+                      <div><label class="form-label" for="supplier-name">Nosaukums <span class="required">*</span></label><input class="form-control" id="supplier-name" maxlength="200" required></div>
+                      <div><label class="form-label" for="supplier-reg">Reģistrācijas numurs <span class="required">*</span></label><input class="form-control" id="supplier-reg" inputmode="numeric" maxlength="11" pattern="[0-9]{11}" required></div>
+                      <div><label class="form-label" for="supplier-vat">PVN numurs</label><input class="form-control" id="supplier-vat" maxlength="20" placeholder="LV12345678901"></div>
+                      <div><label class="form-label" for="supplier-address">Juridiskā adrese <span class="required">*</span></label><textarea class="form-control" id="supplier-address" rows="2" maxlength="500" required></textarea></div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+              <div class="col-md-6">
+                <section class="form-section card border-0 shadow-sm h-100" aria-labelledby="customer-heading">
+                  <div class="card-body p-3 p-md-4">
+                    <div class="section-title d-flex align-items-center gap-3 mb-4"><span>03</span><div><p class="eyebrow mb-1">Kam</p><h2 class="h4 mb-0" id="customer-heading">Pircējs</h2></div></div>
+                    <div class="vstack gap-3">
+                      <div><label class="form-label" for="customer-name">Nosaukums <span class="required">*</span></label><input class="form-control" id="customer-name" maxlength="200" required></div>
+                      <div><label class="form-label" for="customer-reg">Reģistrācijas numurs <span class="required">*</span></label><input class="form-control" id="customer-reg" inputmode="numeric" maxlength="11" pattern="[0-9]{11}" required></div>
+                      <div><label class="form-label" for="customer-vat">PVN numurs</label><input class="form-control" id="customer-vat" maxlength="20" placeholder="LV12345678901"></div>
+                      <div><label class="form-label" for="customer-address">Juridiskā adrese <span class="required">*</span></label><textarea class="form-control" id="customer-address" rows="2" maxlength="500" required></textarea></div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+
+            <section class="form-section card border-0 shadow-sm mb-4" aria-labelledby="payment-heading">
+              <div class="card-body p-3 p-md-4">
+                <div class="section-title d-flex align-items-center gap-3 mb-4"><span>04</span><div><p class="eyebrow mb-1">Apmaksa</p><h2 class="h4 mb-0" id="payment-heading">Bankas informācija</h2></div></div>
+                <div class="row g-3">
+                  <div class="col-md-8"><label class="form-label" for="iban">IBAN <span class="required">*</span></label><input class="form-control text-uppercase" id="iban" maxlength="34" required placeholder="LV00BANK0000000000000"></div>
+                  <div class="col-md-4"><label class="form-label" for="bic">BIC / SWIFT</label><input class="form-control text-uppercase" id="bic" maxlength="20" placeholder="BANKLV2X"></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="form-section card border-0 shadow-sm mb-4" aria-labelledby="lines-heading">
+              <div class="card-body p-3 p-md-4">
+                <div class="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-4">
+                  <div class="section-title d-flex align-items-center gap-3"><span>05</span><div><p class="eyebrow mb-1">Saturs</p><h2 class="h4 mb-0" id="lines-heading">Rēķina pozīcijas</h2></div></div>
+                  <button class="btn btn-outline-primary" id="add-line" type="button"><span aria-hidden="true">＋</span> Pievienot pozīciju</button>
+                </div>
+                <div class="vstack gap-3" id="line-items" aria-live="polite"></div>
+                <div class="mt-3 d-none" id="exemption-wrap">
+                  <label class="form-label" for="exemption-reason">PVN atbrīvojuma pamatojums <span class="required">*</span></label>
+                  <textarea class="form-control" id="exemption-reason" rows="2" maxlength="500" placeholder="Norādi tiesisko pamatojumu vai atbrīvojuma iemeslu"></textarea>
+                </div>
+              </div>
+            </section>
+
+            <section class="action-bar card border-0 shadow-sm" aria-labelledby="actions-heading">
+              <div class="card-body p-3 p-md-4">
+                <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+                  <div><p class="eyebrow mb-1">06 · Gatavs?</p><h2 class="h5 mb-1" id="actions-heading">Pārbaudi un eksportē</h2><p class="small text-secondary mb-0" id="form-status" role="status">Dati netiek saglabāti serverī.</p></div>
+                  <div class="d-grid d-sm-flex gap-2">
+                    <button class="btn btn-outline-secondary" id="validate-button" type="button">Pārbaudīt datus</button>
+                    <button class="btn btn-outline-primary" id="print-button" type="button">Drukāt / PDF</button>
+                    <button class="btn btn-primary" id="download-button" type="button">Lejupielādēt XML</button>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </form>
+        </div>
+
+        <div class="col-xl-5">
+          <aside class="preview-shell" aria-labelledby="preview-heading">
+            <div class="preview-toolbar d-flex align-items-center justify-content-between mb-3">
+              <div><p class="eyebrow mb-1">Tiešais priekšskatījums</p><h2 class="h5 mb-0" id="preview-heading">Rēķins</h2></div>
+              <span class="badge rounded-pill text-bg-light border" id="preview-state">Melnraksts</span>
+            </div>
+            <article class="invoice-paper" id="invoice-preview">
+              <header class="invoice-paper__header">
+                <div><p class="invoice-kicker">RĒĶINS</p><h2 id="preview-number">—</h2></div>
+                <div class="invoice-dates"><p><span>Datums</span><strong id="preview-issue-date">—</strong></p><p><span>Apmaksāt līdz</span><strong id="preview-due-date">—</strong></p></div>
+              </header>
+              <div class="invoice-parties">
+                <section><p class="invoice-label">Pārdevējs</p><h3 id="preview-supplier-name">Nav norādīts</h3><p id="preview-supplier-details">—</p></section>
+                <section><p class="invoice-label">Pircējs</p><h3 id="preview-customer-name">Nav norādīts</h3><p id="preview-customer-details">—</p></section>
+              </div>
+              <div class="table-responsive">
+                <table class="invoice-table">
+                  <thead><tr><th>Apraksts</th><th class="text-end">Daudzums</th><th class="text-end">Cena</th><th class="text-end">Summa</th></tr></thead>
+                  <tbody id="preview-lines"><tr><td colspan="4" class="invoice-empty">Pievieno pirmo pozīciju</td></tr></tbody>
+                </table>
+              </div>
+              <div class="invoice-bottom">
+                <div><p class="invoice-label">Apmaksas informācija</p><p id="preview-payment">IBAN nav norādīts</p><p class="invoice-note" id="preview-note"></p></div>
+                <dl class="invoice-totals"><div><dt>Summa bez PVN</dt><dd id="preview-subtotal">0,00 €</dd></div><div><dt>PVN</dt><dd id="preview-tax">0,00 €</dd></div><div class="invoice-total"><dt>Apmaksai</dt><dd id="preview-total">0,00 €</dd></div></dl>
+              </div>
+              <footer class="invoice-paper__footer"><span>E-rēķins · UBL 2.1</span><span id="preview-reference">Atsauce: —</span></footer>
+            </article>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <section class="help-section border-top">
+      <div class="container-xxl py-4 py-lg-5">
+        <div class="row g-4">
+          <div class="col-lg-5"><p class="eyebrow mb-2">Svarīgi zināt</p><h2 class="h3">Lokāla darbnīca, nevis nosūtīšanas sistēma</h2></div>
+        <div class="col-lg-7"><p>Šī versija neveido kontu, nesaglabā rēķinus un nenosūta tos VID vai saņēmējam. PDF iegūšanai izmanto pārlūka drukas logā pieejamo “Saglabāt kā PDF”. Ja aktivizēta precīzā nolasīšana, OCR attēls tiek nosūtīts OpenAI; serverī fails pēc pieprasījuma netiek paturēts.</p><p class="mb-0">Pilnai tehniskajai pārbaudei izmanto <a href="https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Access+eInvoicing+services" target="_blank" rel="noopener noreferrer">Eiropas Komisijas e-rēķinu validācijas rīkus<span class="visually-hidden"> (atveras jaunā cilnē)</span></a>.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer border-top">
+    <div class="container-xxl py-4 d-flex flex-column flex-md-row justify-content-between gap-2"><p class="mb-0">E-rēķins · dati un attēli netiek saglabāti</p><p class="mb-0">UBL 2.1 · PEPPOL BIS Billing 3.0 pamata struktūra</p></div>
+  </footer>
+
+  <template id="line-template">
+    <article class="line-item border rounded-3 p-3" data-line>
+      <div class="d-flex align-items-center justify-content-between gap-3 mb-3"><h3 class="h6 mb-0" data-line-title>Pozīcija</h3><button class="btn btn-sm btn-link text-danger text-decoration-none" type="button" data-remove-line>Dzēst</button></div>
+      <div class="row g-3">
+        <div class="col-12"><label class="form-label" data-label="description">Nosaukums <span class="required">*</span></label><input class="form-control" data-field="description" maxlength="200" required></div>
+        <div class="col-4 col-md-2"><label class="form-label" data-label="quantity">Daudzums <span class="required">*</span></label><input class="form-control" data-field="quantity" type="number" min="0.000001" step="0.001" value="1" required></div>
+        <div class="col-4 col-md-2"><label class="form-label" data-label="unit">Vienība</label><select class="form-select" data-field="unit"><option value="H87">gab.</option><option value="MTQ">m³</option><option value="HUR">stunda</option><option value="DAY">diena</option><option value="T3">tūkst. gab.</option></select></div>
+        <div class="col-4 col-md-2"><label class="form-label" data-label="unitPrice">Cena bez PVN <span class="required">*</span></label><input class="form-control" data-field="unitPrice" type="number" min="0" step="0.000001" value="0.00" required></div>
+        <div class="col-4 col-md-2"><label class="form-label" data-label="discount">Atlaide</label><input class="form-control" data-field="discount" type="number" min="0" step="0.01" value="0.00"></div>
+        <div class="col-4 col-md-2"><label class="form-label" data-label="charge">Piemaksa</label><input class="form-control" data-field="charge" type="number" min="0" step="0.01" value="0.00"></div>
+        <div class="col-4 col-md-2"><label class="form-label" data-label="tax">PVN režīms <span class="required">*</span></label><select class="form-select" data-field="tax"><option value="S|21">21%</option><option value="S|12">12%</option><option value="S|5">5%</option><option value="Z|0">0%</option><option value="AE|21">Apgrieztā maksāšana</option><option value="E|0">Atbrīvots</option><option value="O|0">PVN nepiemēro</option></select></div>
+      </div>
+      <p class="line-sum text-end mb-0 mt-3">Rindas summa: <strong data-line-total>0,00 €</strong></p>
+    </article>
+  </template>
+</body>
+</html>
