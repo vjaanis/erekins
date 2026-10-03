@@ -53,7 +53,7 @@ const runTesseract = (buffer) => new Promise((resolve, reject) => {
   process.on("error", reject);
   process.on("close", (code, signal) => {
     clearTimeout(timer);
-    if (signal) return reject(new Error("Attēla nolasīšana pārsniedza laika limitu."));
+    if (signal) return reject(new Error("Attēla nolasīšana pārsniedza laika limitu!!!"));
     if (code !== 0) return reject(new Error("Attēlu neizdevās nolasīt."));
     resolve(Buffer.concat(output).toString("utf8").trim());
   });

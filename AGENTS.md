@@ -15,3 +15,4 @@ Pirms darba izlasi uzdevumam atbilstošo dokumentāciju:
 Ievēro arī servera līmeņa ~/AGENTS.md. Neizdomā trūkstošas produkta prasības,
 neglabā projektā piekļuves datus un nepublicē lietotni bez lietotāja lūguma.
 Mainot projekta lēmumu, atjaunini attiecīgo failu mapē docs/.
+Mainot projekta lēmumu, atjaunini attiecīgo failu mapē docs/.Mainot projekta lēmumu, atjaunini attiecīgo failu mapē docs/.
